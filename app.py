@@ -6,7 +6,7 @@ from functools import wraps
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "dev-only-change-this")
-DATABASE = "complaints.db"
+DATABASE = os.environ.get("DATABASE_PATH", "/data/complaints.db")
 
 # Change these before deployment
 ADMIN_USERNAME = os.environ.get("ADMIN_USERNAME", "admin")

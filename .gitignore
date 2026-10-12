@@ -4,3 +4,6 @@ __pycache__/
 *.pyc
 .env
 complaints.db
+*.db
+.venv/
+*.py[cod]
