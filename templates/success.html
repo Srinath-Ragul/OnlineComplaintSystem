@@ -1,0 +1,34 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Complaint Submitted</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            text-align: center;
+            padding: 60px 15px;
+        }
+        .box {
+            max-width: 450px;
+            margin: auto;
+            padding: 30px;
+            background: white;
+            border-radius: 12px;
+        }
+        a { color: #2563eb; }
+    </style>
+</head>
+<body>
+<div class="box">
+    <h1>Complaint Submitted!</h1>
+    <p>Your complaint has been recorded successfully.</p>
+    <h2>Complaint ID: {{ complaint_id }}</h2>
+    <p>Please save this ID for your reference.</p>
+    <a href="/">Submit Another Complaint</a>
+</div>
+</body>
+</html>

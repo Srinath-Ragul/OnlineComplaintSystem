@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            padding: 25px;
+            color: #1f2937;
+        }
+        .container { max-width: 1100px; margin: auto; }
+        .cards { display: flex; gap: 12px; flex-wrap: wrap; }
+        .card, .panel {
+            background: white;
+            padding: 18px;
+            border-radius: 10px;
+            margin-bottom: 18px;
+        }
+        .card { flex: 1; min-width: 120px; }
+        .number { font-size: 28px; font-weight: bold; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        input, select, button {
+            padding: 9px;
+            margin: 4px 0;
+        }
+        button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .table-wrap { overflow-x: auto; }
+        .logout { text-align: right; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="logout">
+        <form action="/admin/logout" method="POST">
+            <button type="submit">Logout</button>
+        </form>
+    </div>
+
+    <h1>Admin Dashboard</h1>
+    <p>View and manage submitted complaints.</p>
+
+    <div class="cards">
+        <div class="card">Total
+            <div class="number">{{ total }}</div>
+        </div>
+        <div class="card">Pending
+            <div class="number">{{ pending }}</div>
+        </div>
+        <div class="card">In Progress
+            <div class="number">{{ in_progress }}</div>
+        </div>
+        <div class="card">Resolved
+            <div class="number">{{ resolved }}</div>
+        </div>
+    </div>
+
+    <div class="panel">
+        <h2>Complaint Records</h2>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                        <th>Update Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for c in complaints %}
+                    <tr>
+                        <td>{{ c.id }}</td>
+                        <td>{{ c.name }}</td>
+                        <td>{{ c.category }}</td>
+                        <td>{{ c.description }}</td>
+                        <td>{{ c.status }}</td>
+                        <td>
+                            <form action="/update/{{ c.id }}"
+                                  method="POST">
+                                <select name="status">
+                                    <option value="Pending"
+                                        {% if c.status == 'Pending' %}selected{% endif %}>
+                                        Pending
+                                    </option>
+                                    <option value="In Progress"
+                                        {% if c.status == 'In Progress' %}selected{% endif %}>
+                                        In Progress
+                                    </option>
+                                    <option value="Resolved"
+                                        {% if c.status == 'Resolved' %}selected{% endif %}>
+                                        Resolved
+                                    </option>
+                                </select>
+                                <button type="submit">Update</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="6">No complaints submitted yet.</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <p><a href="/">Open User Complaint Page</a></p>
+</div>
+</body>
+</html>

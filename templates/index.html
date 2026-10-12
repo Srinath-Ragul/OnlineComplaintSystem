@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Submit Complaint</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            padding: 30px;
+        }
+        .box {
+            max-width: 550px;
+            margin: 30px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+        }
+        h1 { color: #1e3a8a; }
+        input, select, textarea, button {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 12px;
+            margin: 8px 0 15px;
+        }
+        button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        a { color: #2563eb; }
+    </style>
+</head>
+<body>
+<div class="box">
+    <h1>Online Complaint Management</h1>
+    <p>Submit your complaint using the form below.</p>
+
+    <form action="/submit" method="POST">
+        <label>Your Name</label>
+        <input name="name" required maxlength="100">
+
+        <label>Complaint Category</label>
+        <select name="category" required>
+            <option value="">Choose category</option>
+            <option>Infrastructure</option>
+            <option>Water Supply</option>
+            <option>Electricity</option>
+            <option>Sanitation</option>
+            <option>Other</option>
+        </select>
+
+        <label>Complaint Description</label>
+        <textarea name="description" rows="5"
+                  required maxlength="2000"></textarea>
+
+        <button type="submit">Submit Complaint</button>
+    </form>
+
+    <p>Are you an administrator?
+        <a href="/admin/login">Admin Login</a>
+    </p>
+</div>
+</body>
+</html>
